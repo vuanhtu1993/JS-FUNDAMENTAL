@@ -36,11 +36,29 @@ phụ thuộc vào cách gọi hàm đó
   - 6 kiểu nguyên thủy trong Javascript là: boolean, null, undefined, number, string
   - Những kiểu object có sẵn trong javascript: String, Number, Boolean, Object, Function, Array, Date, RegEx
 * Cách để clone object trong JS:
-    - Loop qua từng thuộc tính rồi copy
+    1. Để bảo tồn việc toàn vẹn dữ liệu của object, phải clone một object mới đẻ truyền cho người khác cần dùng(thích sửa gì thì sửa ko ảnh hưởng đến object cũ)
+    ```
+
     - Shallow Copy: Object.assign()
+    Cách 1:
+    Loop qua từng thuộc tính rồi copy (chỉ hoạt động khi value là )
+    Cách 2:
+    var a = { o : { n: 100}};
+    var a_copy = Object.assign({}, a)
     - Deep Copy: JSON.parse(JSON.stringify(object))
+    var a = { o: { n: 1000} };
+    var b = JSON.parse(JSON.toString(a));
+    ```
 
-
+## OOP la gi
+###
+### 4 Tinh chat của hướng đối tượng:
+* Trong lập trình hướng đối tượng có 4 tính chất
+    1. Tính Trừu tượng : Là việc mô hình hóa một lớp đối tượng ngoài đời thật vào
+    trong chương trình của mình
+    2. Tính Bao đóng: Không cho phép đối tượng khác truy cập trực tiếp vào
+    3. Tính Kế thừa: là sự kế thừa tính chất (thuộc tính và phương thức) của class con từ class cha
+    4. Tính Đa hình: là phương thức giống tên nhau nhưng cách thế hiện khác nhau (cùng phương thức kêu nhưng chó kêu khác mèo)
 ### 1.3 Class Theory
 * Nhớ lại OOP là gì ? các thuộc tính của OOP?<br>
   OOP là phương pháp lập trình dựa trên các đối tượng, mỗi đối tượng có các thuộc tính và hành vi riêng của nó.<br>
