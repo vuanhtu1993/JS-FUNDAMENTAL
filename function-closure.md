@@ -28,17 +28,53 @@ khai báo hàm lên đầu tiên, sau đó là các khai báo biến (chỉ khai
 ### What is Lexical Scope?
 - Là phạm vi hoạt động của biến
 ### What is Closure Scope?
-```
-function foo() {
-  var a = 2;
-  function bar() {
-    console.log( a );
-  }
-  return bar;
-}
-var baz = foo();
-baz(); // ???
-```
+   Xét ví dụ sau:
+   ```
+   function foo() {
+         var a = 2;
+         function bar() {
+           console.log( a );
+         }
+         return bar;
+         // được khai báo ở trong 1 scope nhưng được gọi ở một scope khác (trong trường
+            hợp này là được khai báo trong foo nhưng lại được gọi ở top)
+         // bar được khỏi là closure function vì nó có khả năng nhớ các biến
+            trong lexical scope của nó
+          }
+       var baz = foo();
+       baz();
+   ```
+   Xét một trick trong closure:
+   ```
+   Đề bài: cho 3 button, click vào từng button cho ra số tương ứng
+    // Quyết idea
+    window.onload = () => {
+    for(var i = 1; i<=3; i++) {
+       var b = document.getElementById('bt
+       var fnc = (function f() {
+           var a = i;
+           return function g() {
+               alert(a);
+           }
+
+       b.addEventListener('click', fnc);
+      }
+    }
+
+    // hay rút ngắn như sau
+    for(var i = 1; i<=3; i++) {
+        var b = document.getElementById('btn' + i);
+        b.addEventListener('click', (function() {
+            var j = i;
+            return function() {
+                console.log(j);
+            }
+        })() );
+      }
+      // note: call sẽ invoke hàm được return từ IIFE function
+   ```
+
+
 # 2 Assignment
 Tạo hàm range(a, b) trả về array các số tự nhiên liên tiếp từ a => b. Ví dụ: range(1, 4) = [1, 2, 3, 4]
 Tạo hàm sum(array) tính tổng các số trong array. V/d sum([1, 2, 3, 4]) = 10;

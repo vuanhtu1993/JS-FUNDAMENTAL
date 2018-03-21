@@ -49,38 +49,85 @@ phụ thuộc vào cách gọi hàm đó
     var a = { o: { n: 1000} };
     var b = JSON.parse(JSON.toString(a));
     ```
-
+* Cách duyệt value của object
+    ```
+    1.
+    var obj = { a: 10, b: 20 }
+    Object.key(obj).forEach((a) => { console.log() })
+    ```
 ## OOP la gi
-###
-### 4 Tinh chat của hướng đối tượng:
+### 1. Tinh chat của hướng đối tượng:
 * Trong lập trình hướng đối tượng có 4 tính chất
     1. Tính Trừu tượng : Là việc mô hình hóa một lớp đối tượng ngoài đời thật vào
     trong chương trình của mình
     2. Tính Bao đóng: Không cho phép đối tượng khác truy cập trực tiếp vào
     3. Tính Kế thừa: là sự kế thừa tính chất (thuộc tính và phương thức) của class con từ class cha
     4. Tính Đa hình: là phương thức giống tên nhau nhưng cách thế hiện khác nhau (cùng phương thức kêu nhưng chó kêu khác mèo)
-### 1.3 Class Theory
+### 2. Class Theory
 * Nhớ lại OOP là gì ? các thuộc tính của OOP?<br>
   OOP là phương pháp lập trình dựa trên các đối tượng, mỗi đối tượng có các thuộc tính và hành vi riêng của nó.<br>
   OOP có 4 thuộc tính là: tính đóng gói, tính trừu tượng, tính đa hình và tính kế thừa.
 * So sánh "class" và "instance"
-    - Class: là một khái niệm trong Lập trình hướng đối tượng mô tả cho những thực thể có chung tính chất và hành vi. Class định nghĩa những thuộc tính và hành vi được dùng cho những đối tượng của lớp đó
+    - Class: là một khái niệm trong Lập trình hướng đối tượng mô tả cho những vật thể thực thể có chung tính chất và hành vi
+    Vd: class như là bản vẽ ngôi nhà
     - Instance: Là sự thế hiện của một class
 * Constructor là gì?
-  Constructor là một phương thức đặc biệt để tạo và khởi tạo một object từ một class
-### 1.4 Prototypes
-* Xem xét đoạn code sau, em có nhận xét gì ?
+  Constructor là một phương thức đặc biệt khởi tạo một object từ một class
+### 3. Prototypes
+* Kế thừa trong JAVA
+    ```
+    class Con extends Cha;
+    "super trong JAVA sẽ tự động chaCon1 = new Cha"
+    con1 = new Con(); // mỗi thằng con được sinh ra sẽ có 1 thằng cha riêng
+    ```
+* Kế thừa trong JavaScript
+    ```
+    Kế thừa trong JavaScript được thế hiện bằng việc
+    ```
+* Prototype trong JS
+    ```
+    var o1 = {
+        a: 2,
+    }
+    o2 = Object.create(o1);
+    o2._proto_ == o1; // _proto_ chỉ được dùng trong object (là phương thước của object)
+    Object.getPrototypeOf(o2) == o1 //true
+    o2 thừa kế từ o1 (chỉ get dữ liệu ra, không thể can thiệp vào bên trong o1)
+
+    Kế thừa trong JS là sự tác động khác vói Java(tạo ra nhiều thằng cha)
+    trong JS chỉ tạo 1 thằng cha và những thằng con khác đều trỏ vào thằng cha đó
+
+    o1.b = 1000;
+
+    tus.prototype = cha tus;
+    cha tus.prototype = cha cha tus;
+
+
+    GỢI HÀM DƯỚI DẠNG NEW var a = new b();(khi sử dụng )
+    1. Tạo object mới
+    2. this -> object mới
+    3. return this
+    4. object mới. prototype = cha object mới
+    ```
+* Ví dụ về prototype
 ```
-var o1 = {
-  a: 2
-}
+    function Cha() {
+        this.name = 'Cha';
+    }
+    function Con(name) {
+        this.name = name;
+        this.getName = function() {
+            console.log(this.name)
+        }
+    }
+    // Con kế thừa cha
+    var chaQD = new Cha();
+    Con.prototype = chaQD;
 
-var o2 = Object.create(o1);
+    // Tạo các object con
+    var tus = new Con(); tus.prototype = Con.prototype = chaQD ???
+    var hai = new Con(); hai.prototype = Con.prototype = chaQD ???
 
-console.log(o2.a); // ??
-
-o1.a = 10;
-console.log(o2.a); // ??
 ```
 Có một object tên là o1, object o2 được tạo mới từ object o1.  Vì o2 được tạo ra từ o1 nên nó có cùng thuộc tính với o1 nên khi câu lệnh
 console.log(o2.a) ta được kết quả trả về là 2. Khi ta thay đổi thuộc tính của o1 thì thuộc tính của o2 cũng thay đổi vì vậy khi chạy câu lệnh console.log(o2.a) ta được kết quả là 10.
