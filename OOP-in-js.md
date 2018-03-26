@@ -81,9 +81,34 @@ phụ thuộc vào cách gọi hàm đó
     con1 = new Con(); // mỗi thằng con được sinh ra sẽ có 1 thằng cha riêng
     ```
 * Kế thừa trong JavaScript
-    ```
-    Kế thừa trong JavaScript được thế hiện bằng việc
-    ```
+        ```
+        Kế thừa trong JavaScript được thế hiện qua Prototype, tất cả thằng con mới được sinh ra
+        đều có prototype trỏ đến (class của nó chấm prototype)
+        class Cha() {
+            name: "Cha",
+        }
+        class Con() {  }
+
+        1. // kế thừa trong js (chỉ kế thừa các phương thức thuộc tính viết ở Prototype cha)
+        var chaQD = new Cha();
+        Con.prototype = chaQD;
+
+        2. // instance của Con
+        var duy = new Con(); // Object.getPrototypeOf(duy) = Con.prototype = chaQD;
+        var linh = new Con(); // Object.getPrototypeOf(linh) = Con.prototype = chaQD;
+        var phuoc = new Con(); // Object.getPrototypeOf(phuoc) = Con.prototype = chaQD;
+
+        Vậy tất cả thẳng con của Con đều có prototype trỏ đến cùng 1 thằng chaQD
+
+        3. // nhận xét:
+        duy.name = undefined
+
+        // nhưng nếu Cha.prototype.character = 'kind and handsome';
+        duy.character = 'kind and handsome';
+
+        // kết luận: chỉ kế thừa qua prototype
+
+        ```
 * Prototype trong JS
     ```
     var o1 = {
@@ -109,26 +134,6 @@ phụ thuộc vào cách gọi hàm đó
     3. return this
     4. object mới. prototype = cha object mới
     ```
-* Ví dụ về prototype
-```
-    function Cha() {
-        this.name = 'Cha';
-    }
-    function Con(name) {
-        this.name = name;
-        this.getName = function() {
-            console.log(this.name)
-        }
-    }
-    // Con kế thừa cha
-    var chaQD = new Cha();
-    Con.prototype = chaQD;
-
-    // Tạo các object con
-    var tus = new Con(); tus.prototype = Con.prototype = chaQD ???
-    var hai = new Con(); hai.prototype = Con.prototype = chaQD ???
-
-```
 Có một object tên là o1, object o2 được tạo mới từ object o1.  Vì o2 được tạo ra từ o1 nên nó có cùng thuộc tính với o1 nên khi câu lệnh
 console.log(o2.a) ta được kết quả trả về là 2. Khi ta thay đổi thuộc tính của o1 thì thuộc tính của o2 cũng thay đổi vì vậy khi chạy câu lệnh console.log(o2.a) ta được kết quả là 10.
 * Tìm hiểu về **Object.prototype**<br>
