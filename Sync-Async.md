@@ -2,8 +2,10 @@
 ## 1.1 Sync vs Async
   * Sync code là gì <br/>
     Trả lời: Là những dòng code được thực thi theo thứ tự từ trên xuống dưới, dòng code phía dưới phải đợi cho đến khi dòng code phía trên được xử lí xong.
+
   * Async code là gì <br/>
-    Trả lời: Là những đoạn code có thể thực thi ngay, không cần phần phải đợi code phía trên được xử lý xong.
+    Trả lời: Code ở phía dưới có thể thực hiện ngay mà ko cần đợi hàm phía trước trả lại giá trị
+    VD:
   * Theo em JavaScript là ngôn ngữ đồng bộ hay bất đồng bộ? <br/>
     Trả lời: Theo em, Javascript là ngôn ngữ đồng bộ.
 ## 1.2 setTimeOut là một hàm bất đồng bộ của JS
@@ -33,6 +35,7 @@
 ## 1.3 Event Loop
   * Tìm hiểu về Event loop, và giải thích lại đoạn code trên theo ý hiểu của em. Reference: https://www.youtube.com/watch?v=8aGhZQkoFbQ
   Giải thích:
+  Là một cơ chế của browser hoặc nodeJS hỗ trợ để thực thi code bất đồng bộ
   ```
   console.log('Hi');
 
@@ -136,25 +139,31 @@
    1. Việc lồng quá nhiều callback sẽ khiến code khó đọc, khó bảo trì.
 
 ## 1.5 Promises
+ * Tại sao lại cần Promise
+ ```
+ Nhằm khắc phục nhược điểm của callback là:
+ - Độ tin cậy kém vì không có gì đảm bảo code được thực thi đc đặt đúng cách
+ - Xuất hiện code callback hell, code phức tạp khó sửa chữa
+ ```
  * Tìm hiểu về Promises: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
       ```
       Promise là một đối tượng đại diện cho kết quả cuối cùng của một tác vụ không đồng bộ, có thể là hoàn thành hoặc thất bại.
       Một promise tồn tại ở 3 trạng thái:
        - pending: Trạng thái ban đầu, chưa có kết quả thành công hay thất bại.
-       - fulfilled: Tác vụ thành công.
-       - rejected: Tác vụ thất bại.
+       - fulfilled: Tác vụ thành công và trả lại giá trị như lời hứa
+       - rejected: Tác vụ thất bại và phải đưa ra lí do tại sao ko thực hiện lời hứa
       ```
  * What is a future value ?
  ```
- NA
+ Là giá trị mà lời hứa và promise sẽ thực hiện
  ```
  * Promise value ?
   ```
-  NA
+  Là giá trị thực sự khi Promise trả lại
   ```
  * Promise Events ?
  ```
- NA
+ Pending, Fulfilled, Rejected
  ```
  * How to get Promise value?
    ```
@@ -170,18 +179,39 @@
    ```
  * How to chain Promises ?
     ```
-    Kết hợp việc trả về 1 promise và sử dụng method then
+    function eventToPromise(event, element) {
+          return new Promise(function(resolve, reject) {
+            element.addEventListener(event, function() {
+                resolve('event to Promise')
+            })
+          })
+        }
+    function toPromise(asyncFunc){
+        return new Promise(resolve, reject) {
+            asyncFunc(function() {
+                resolve(data);
+            })
+        }
+    }
+    Ta xét ví dụ sau:
 
-    doSomething().then(function(result) {
-     return doSomethingElse(result);
-   })
-   .then(function(newResult) {
-     return doThirdThing(newResult);
-   })
-   .then(function(finalResult) {
-     console.log('Got the final result: ' + finalResult);
-   })
-   .catch(failureCallback);
+    var b = document.getElementById('btn');
+
+    // tao promise khi click button
+    eventToPromise('click', b);
+
+    // tạo promise bằng asyncFunc
+    toPromise(ajax, url);
+
+    // chain Promise
+    eventToPromise('click', b)
+        .then(function() {
+            return toPromise(ajax, mockAPI);
+        })
+        .then(function(data) {
+            console.log(data);
+        })
+
     ```
  * Promise.all
     ```
