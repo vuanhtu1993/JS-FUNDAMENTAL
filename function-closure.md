@@ -20,13 +20,22 @@
 ```
 ### What is Scope?
 - Là phạm vi hoạt động của biến
+- Scope được xác định tại nơi mà hàm đc khai báo
+    ```
+    function a() {
+        var b = 10;
+        var c = function() {
+            var d = 20;
+        }
+    }
+    ```
 ### Hoisting
 - Là một kỹ thuật trong js, compiler sẽ duyệt qua một lượt code và đầy các
 khai báo hàm lên đầu tiên, sau đó là các khai báo biến (chỉ khai báo chưa gán)
 ### What is Nested Scope?
-- Là phạm vi hoạt động của biến
+-
 ### What is Lexical Scope?
-- Là phạm vi hoạt động của biến
+- Được xác định tại nơi khai báo function đó
 ### What is Closure Scope?
    Xét ví dụ sau:
    ```
@@ -62,6 +71,7 @@ khai báo hàm lên đầu tiên, sau đó là các khai báo biến (chỉ khai
     }
 
     // hay rút ngắn như sau
+    // note: call sẽ invoke hàm được return từ IIFE function
     for(var i = 1; i<=3; i++) {
         var b = document.getElementById('btn' + i);
         b.addEventListener('click', (function() {
@@ -71,10 +81,44 @@ khai báo hàm lên đầu tiên, sau đó là các khai báo biến (chỉ khai
             }
         })() );
       }
-      // note: call sẽ invoke hàm được return từ IIFE function
+
+      // hoặc dùng let để tạo block chỗ mỗi closure
+      for(let i = 1; i <= 3; i++) {
+        var btn = document.getElementById('btn' + i);
+        btn.addEventListener("click", function() {
+            console.log(i);
+        })
+      }
    ```
 
+### IIFE (IMMEDIATED INVOKED FUNCTION EXPRESSION)
 
+  - Xét ví dụ sau về IIFE
+      ```
+      (function (i) {
+        return function() {
+            console.log('immediated invoke function' + i)
+        }
+      })("expession");
+      ```
+   - Xét bài toán closure phía trên
+       ```
+       for(i = 1; i < ; i++) {
+       // thời điểm hiện tại
+        var b = doccument.getElementById('btn' + i);
+        b.addEvenListener('click', (function f() {
+           var j = i
+           return function g() {
+           // thời điểm sau này
+              alert(j);
+           }
+        })() )
+       }
+       Nhận xét:
+       1. f và g có thể là các anonymous function (nhưng để thế này cho dễ nhìn :))
+       2. Tại mỗi vòng for thì f sẽ đươc chạy ngay lập tức (sau khi hàm f chạy xong sẽ biến mất
+       và để lại biến j và return function g() )
+       ```
 # 2 Assignment
 Tạo hàm range(a, b) trả về array các số tự nhiên liên tiếp từ a => b. Ví dụ: range(1, 4) = [1, 2, 3, 4]
 Tạo hàm sum(array) tính tổng các số trong array. V/d sum([1, 2, 3, 4]) = 10;
