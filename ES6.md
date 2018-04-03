@@ -27,7 +27,7 @@ Do ES6 mới ra đời trong năm 2015 nên nó chưa được hỗ trợ hoàn 
 ## 1.3 Arrow Function
 ### 1.3.1 Arrow Function syntax ?
 - Có nhiều biến dạng hơn,
-    ```
+    ``` javascript
     var getId = (v) => {
         console.log(v.id) // bên trong dấu {} là một statement
     }
@@ -40,7 +40,7 @@ Do ES6 mới ra đời trong năm 2015 nên nó chưa được hỗ trợ hoàn 
     var getId = v => ({ id: 10});
     ```
 - Điểm bất lợi của arrow function
-    ```
+    ```javascript
     1. arrow function là một anonymous function và cũng như không thể đặt tên cho nó
     nên dẫn đến lỗi thì không biết lỗi ở đâu
     2. this của arrow function là tĩnh
@@ -48,7 +48,7 @@ Do ES6 mới ra đời trong năm 2015 nên nó chưa được hỗ trợ hoàn 
     cha trên nữa của nó
     ```
 - Điểm lợi của anonymous function
-    ```
+    ```javascript
     1. Ngắn ngọn hơn
     2. This đc xác định tại nơi hàm đc khai báo
     3. var obj = {
@@ -67,7 +67,7 @@ Do ES6 mới ra đời trong năm 2015 nên nó chưa được hỗ trợ hoàn 
     ```
 ### 1.3.2 Compare arrow function syntax to ES5 function syntax ? <br>
 Arrow function giúp code nhìn tường minh và ngắn gọn hơn.
-```
+```javascript
 //ES5
 function sayHello(name) {
     console.log("Xin chào " + name);
@@ -79,7 +79,7 @@ var hello = (name) => console.log("Xin chào " + name);
 hello('Linh');
 ```
 Khắc phục được các vấn đề của con trỏ this.
-```
+```javascript
 var person = {
   firstName: 'Linh',
   friends : ['Minh', 'Sang', 'Khoa', 'Hoang'],
@@ -92,7 +92,7 @@ var person = {
 };
 ```
 ### 1.3.3 Arrow function variations, try them in Babel Repl, fix error if any
-```
+```javascript
 const f1 = () => 10;
 const f2 = x  => 3;
 const f3 = (...x) => 3;
@@ -106,14 +106,14 @@ const f6 = x => { return 10; }
 const f7 = x => { y: x }
 ```
 ### 1.3.4 True or false: arrow functions are anonymous ?
-```
+```javascript
 const myFunc = x => 4;
 console.log(myFunc.name);
 ```
 Arrow functions là biểu thức hàm
 ### 1.3.5 this
 Evaluate the code below, can you explain what happens ?
-```
+```javascript
 var obj = {
   a: 10,
   method: function method() {
@@ -139,14 +139,14 @@ this trong object obj không trỏ đến obj mà trỏ đến object windows nh
 this trong object obj2 trỏ đến obj2 mà trong obj có a = 10 nên giá trị trả về là 10.
 ### 1.3.6 Promise
 Compare 2 Promise call below, what do you think ? If v is null or undefined what will happend ? How you handle that ?
-```
+```javascript
 p.then(function (v) { return v.id });
 
 p.then(v => v.id);
 ```
 
 ### 1.3.7 Exercise 01: rewrite all function below with arrow functions and try to avoid curly braces {} as much as possible
-    ```
+    ```javascript
     (function iife(){
 
       function foo(x) {
@@ -189,7 +189,7 @@ p.then(v => v.id);
 ## 1.4 Block Scope
 ### 1.4.1 Compare let and var <br>
 ```var``` tạo ra biến có phạm vi truy cập xuyên suốt function chứa nó. ```let``` tạo ra một biến chỉ có thể truy cập được trong block bao quanh nó(bên trong dấu {}).
-```
+```javascript
 //var
 
 function a() {
@@ -213,7 +213,7 @@ function b() {
 }
 ```
 ### 1.4.2 Closures scope, how do let work in closures, try example below
-```
+```javascript
 for (let i = 0; i < 3; i++) {
   let btn = document.getElementById('btn' + i);
   btn.addEventListener('click', () {
@@ -224,14 +224,14 @@ for (let i = 0; i < 3; i++) {
 Khi click vào button có id là btn0 thì xuất hiện hộp thoại hiển thị 0. Tương tự như vậy với btn1 và btn2 sẽ hiện hộp thoại lần lượt là 1 và 2.
 ### 1.4.3 What is const ? Example ?
 ```const``` dùng để khởi tạo một hằng số, không thể thể gán lại.
-```
+```javascript
 const a = 2;
 console.log( a );    // 2
 
 a = 3;                // TypeError!
 ```
 ### 1.4.4 Exercise: fix code below (anywhere) so the console.log will display true
-```
+```javascript
 var x = 2, fns = [];
 
 (function(){
@@ -263,7 +263,7 @@ console.log((x * 2) === fns[x*2]);
 
 #### 1.4.3 Consider the following code, what will be printed out? {#sec-1-4-3}
 
-```
+```javascript
 class Cha {
   constructor() { this.id = 'a' }
   method() {
@@ -333,101 +333,78 @@ var x = 2, fns = [];
 console.log((x * 2) === fns[x*2]()); // must be true
 ```
 
-
-
-### 1.6 Default Values and the Gather/Spread Operator {#sec-1-6}
-
-#### 1.6.1 Default Values: how to define a functon with default value in ES6 ? And in ES6 ? {#sec-1-6-1}
-
-#### 1.6.2 Lazy expression, evaluate the following code, how many times g have been called ? {#sec-1-6-2}
-
+# 1.6 Default Values and the Gather/Spread Operator
+## 1.6.1 Default Values: how to define a functon with default value in ES5? And in ES6 ?
+* trong es5 dung
+```javascript
+function(a){
+    a=a||1;
+}
 ```
+* es6
+```javascript
+var x = (a=1)=>{}
+var x = ([a=1])=>{}
+var x = ([a]=[1])=>{}
+var x = ({a}={a:1})=>{}
+var x = ({a=1}={})=>{}
+```
+## 1.6.2 Lazy expression, evaluate the following code, how many times g have been called ?
+```javascript
 function g() {
   console.log('g');
 }
-
 function f(x = g()) {
 }
-
-f(1);
-f();
-f();
+f(1);//khong goi g()
+f();//goi g()
 ```
+* Lazy expression la quá trình trì hoãn tính toán 1 biểu thức trong trường hợp này là biểu thức `x = g()` sẽ trì hoãn cho đến khi hàm f thực thi => hay vãi lúa
+```javascript
+var x = 1;
 
-#### 1.6.3 Evaluate the following code {#sec-1-6-3}
-
-    ```
-    var x = 1;
-
-    function f(x = 2, fn = function() { return x }) {
-      console.log(fn());
-    }
-
-    f();
-
-    Pay attention: scope của hàm trong js phụ thuộc vào nơi nó được định nghĩa
-    ```
-
-#### 1.6.4 What's a variadic arguments? {#sec-1-6-4}
-
-    ```
-    function abc() {
-        console.log(arguments);
-        console.log(Array.isArray(arguments));
-        const a = [].slice.call(argumnets);
-        return
-    }
-    ```
-
-#### 1.6.5 What is **arguments** in a JavaScript function ? {#sec-1-6-5}
-
-#### 1.6.6 **…** operator can be used in 2 differents ways, see code below: {#sec-1-6-6}
-
-```
-Khai báo:
-function g(...args) {
-    args = [1,2,3,4];
-    console.log(...args); // 1,2,3,4
+function f(x = 2, fn = function() { return x }) {
+  console.log(fn());
 }
-g(1, 2, 3, 4)
-function f(...args) { // gather arguments (gán vì đc khai báo trong param của hàm) giá trị từ tham số vào biến
+f();//2
+f(x);//1
+f(x,()=>11);//11
+
+```
+## 1.6.4 What's a variadic arguments?
+* biến đổi argument ?
+## 1.6.5 What is arguments in a JavaScript function ?
+* là mảng các parameter trong function
+## 1.6.6 … operator can be used in 2 differents ways, see code below:
+```javascript
+function f(...args) { // gather arguments
 }
 
 var x = [1, 2, 3];
 var y = [4, 5];
-var z = [0, ...x, ...y ]; // spread out, (giá trị) tách từng phần tử trong mảng ra thành từ phần tử riêng biệt
+var z = [0, ...x, ...y ]; // spread out
 ```
-
-#### 1.6.7 In which way the **…** operator is used in following code {#sec-1-6-7}
-
-```
-function g(...arr) { // ???
+* là 2 cách dùng mang tính tương phản
+    * khi dùng làm rest param => gộp các individual thành 1 group
+    * khi là spread operater nó phân tách 1 nhóm ra các individual
+## 1.6.7 In which way the … operator is used in following code
+```javascript
+const f=(...arr)=>arr;
+const g= ()=>{
+    var a1 = [2, 4];
+    var a2 = [6, 8, 10, 12];
+    a1.pop();
+    a2.shift()
+    return f(...a1,...a2);
 }
-
-var a = [1, 2, 3];
-var b = [4, 5, 6];
-
-g(...a, ...b); // ???
+console.log(g().join("") === "281012"); // must print true
+```
+cach 2
+```javascript
+const f=(...arr)=>arr,g= ()=>{const a1 = [2, 4],a2 = [6, 8, 10, 12],[d]=a1,[,...dnd]=a2; return f(d,...dnd);}
+console.log(g().join("") === "281012"); // true
 ```
 
-#### 1.6.8 Exercise: fix the following code so console.log will print **true** {#sec-1-6-8}
-
-    ```
-    function f() { }
-
-    function g() {
-      var a1 = [2, 4];
-      var a2 = [6, 8, 10, 12];
-
-      return f();
-    }
-
-    console.log(g().join("") === "281012"); // must print true
-    ```
-- Bài giải
-    ```
-    g().join tuc la trước join phải là một array và
-    ```
 
 ### 1.7 Destructuring (Generator => destructoring => arrow => class)
 1. Gán giá trị cho mảng
