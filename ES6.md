@@ -40,18 +40,17 @@ Do ES6 mới ra đời trong năm 2015 nên nó chưa được hỗ trợ hoàn 
     var getId = v => ({ id: 10});
     ```
 - Điểm bất lợi của arrow function
-    ```javascript
-    1. arrow function là một anonymous function và cũng như không thể đặt tên cho nó
-    nên dẫn đến lỗi thì không biết lỗi ở đâu
-    2. this của arrow function là tĩnh
-    2. this của arrow function sẽ ăn theo this của thằng cha nó, nếu thằng cha nó là arrow function thì nó lại phụ thuộc vào thằng
-    cha trên nữa của nó
-    ```
+  ```javascript
+  //1. arrow function là một anonymous function và cũng như không thể đặt tên cho nó nên dẫn đến lỗi thì không biết lỗi ở đâu
+  //2. this của arrow function là tĩnh
+  //3. this của arrow function sẽ ăn theo this của thằng cha nó, nếu thằng cha nó là arrow function thì nó lại phụ thuộc vào thằng
+  //cha trên nữa của 
+  ```
 - Điểm lợi của anonymous function
     ```javascript
-    1. Ngắn ngọn hơn
-    2. This đc xác định tại nơi hàm đc khai báo
-    3. var obj = {
+    //1. Ngắn ngọn hơn
+    //2. This đc xác định tại nơi hàm đc khai báo
+    //3. var obj = {
          a: 10,
          method: function method() {
            setTimeout(function () {
@@ -146,46 +145,46 @@ p.then(v => v.id);
 ```
 
 ### 1.3.7 Exercise 01: rewrite all function below with arrow functions and try to avoid curly braces {} as much as possible
-    ```javascript
+  ```javascript
     (function iife(){
-
-      function foo(x) {
-        var y = x * 2;
-
-        return function bar(z) {
-          if (z.length > 3) {
-            return z.map( function baz(v){
-              if (v > 3) return v + y;
-              else return baz( v * 4 );
-            } );
+    
+          function foo(x) {
+            var y = x * 2;
+    
+            return function bar(z) {
+              if (z.length > 3) {
+                return z.map( function baz(v){
+                  if (v > 3) return v + y;
+                  else return baz( v * 4 );
+                } );
+              }
+              else {
+                var obj = [];
+    
+                setTimeout( function bam(){
+                  obj.length = 1;
+                  obj[0] = this.w;
+                }.bind( this ), 100 );
+    
+                return obj;
+              }
+            };
           }
-          else {
-            var obj = [];
-
-            setTimeout( function bam(){
-              obj.length = 1;
-              obj[0] = this.w;
-            }.bind( this ), 100 );
-
-            return obj;
-          }
-        };
-      }
-
-      var p = foo( 2 ); // INVOKE FOO
-      var list1 = [1,3,4];
-      var list2 = list1.concat( 6 );
-
-      list1 = p.call( { w: 42 }, list1 ); // INVOKE BAR CÓ GÁN THIS BẰNG { w: 42 }
-      list2 = p( list2 ); // INVOKE BAR KO GÁN THIS
-
-      setTimeout( function(){
-        console.log( list1[0] === list2.reduce( function(s,v){
-          return s + v;
-        }, 0 ) );
-      }, 200 );
-    })();
-    ```
+    
+          var p = foo( 2 ); // INVOKE FOO
+          var list1 = [1,3,4];
+          var list2 = list1.concat( 6 );
+    
+          list1 = p.call( { w: 42 }, list1 ); // INVOKE BAR CÓ GÁN THIS BẰNG { w: 42 }
+          list2 = p( list2 ); // INVOKE BAR KO GÁN THIS
+    
+          setTimeout( function(){
+            console.log( list1[0] === list2.reduce( function(s,v){
+              return s + v;
+            }, 0 ) );
+          }, 200 );
+        })();
+```
 ## 1.4 Block Scope
 ### 1.4.1 Compare let and var <br>
 ```var``` tạo ra biến có phạm vi truy cập xuyên suốt function chứa nó. ```let``` tạo ra một biến chỉ có thể truy cập được trong block bao quanh nó(bên trong dấu {}).
@@ -243,7 +242,7 @@ var x = 2, fns = [];
 
 console.log((x * 2) === fns[x*2]()); // must be true
 ```
-```
+```javascript
 var x = 2, fns = [];
 
 (function(){
@@ -263,36 +262,33 @@ console.log((x * 2) === fns[x*2]);
 
 #### 1.4.3 Consider the following code, what will be printed out? {#sec-1-4-3}
 
-```javascript
-class Cha {
-  constructor() { this.id = 'a' }
-  method() {
-    console.log('Cha', this.id)
-  }
-}
-
-class Con extends Cha {
-  method() {
-    super.method();
-    console.log('Con', this.id)
-  }
-}
-```
+    ```javascript
+    class Cha {
+      constructor() { this.id = 'a' }
+      method() {
+        console.log('Cha', this.id)
+      }
+    }
+    
+    class Con extends Cha {
+      method() {
+        super.method();
+        console.log('Con', this.id)
+      }
+    }
+    ```
 
 #### 1.4.4 What is static keyword ? {#sec-1-4-4}
-    ```
-    Static là từ khóa đứng trước một method đc định nghĩa trong class mà tại đó class có thể gọi
-    được phương thức static đó ()
-    ```
+    >Static là từ khóa đứng trước một method đc định nghĩa trong class mà tại đó class có thể gọi
+    >được phương thức static đó ()
 
 ### 1.5 Block Scope: let + const {#sec-1-5}
 
-    ```
-    Giống nhau: Đều để khai báo biến, có giá trị trong block scope
-
-    Khác nhau: const phải đc khai báo giá trị ban đầu và không được gán lại
-                let ko cần khai báo giá trị ban đầu và được gán lại đc
-    ```
+    >Giống nhau: Đều để khai báo biến, có giá trị trong block scope <br>
+    > 
+    >Khác nhau: const phải đc khai báo giá trị ban đầu và không được gán lại
+    >                 let ko cần khai báo giá trị ban đầu và được gán lại đc
+    >
 
 #### 1.5.1 Compare let and var {#sec-1-5-1}
 
@@ -305,7 +301,7 @@ class Con extends Cha {
 
 #### 1.5.2 Closures scope, how do let work in closures, try example below {#sec-1-5-2}
 
-``` {.src .src-js}
+``` javascript
 for (let i = 0; i < 3; i++) {
   let btn = document.getElementById('btn' + i);
   btn.addEventListener('click', () {
@@ -320,7 +316,7 @@ for (let i = 0; i < 3; i++) {
 
 #### 1.5.4 Exercise: fix code below (anywhere) so the console.log will display true {#sec-1-5-4}
 
-``` {.src .src-js}
+``` javascript
 var x = 2, fns = [];
 
 (function(){
@@ -336,29 +332,29 @@ console.log((x * 2) === fns[x*2]()); // must be true
 # 1.6 Default Values and the Gather/Spread Operator
 ## 1.6.1 Default Values: how to define a functon with default value in ES5? And in ES6 ?
 * trong es5 dung
-```javascript
-function(a){
-    a=a||1;
-}
-```
+    ```javascript
+    function(a){
+        a = a||1;
+    }
+    ```
 * es6
-```javascript
-var x = (a=1)=>{}
-var x = ([a=1])=>{}
-var x = ([a]=[1])=>{}
-var x = ({a}={a:1})=>{}
-var x = ({a=1}={})=>{}
-```
+    ```javascript
+    var x = (a=1)=>{}
+    var x = ([a=1])=>{}
+    var x = ([a]=[1])=>{}
+    var x = ({a}={a:1})=>{}
+    var x = ({a=1}={})=>{}
+    ```
 ## 1.6.2 Lazy expression, evaluate the following code, how many times g have been called ?
-```javascript
-function g() {
-  console.log('g');
-}
-function f(x = g()) {
-}
-f(1);//khong goi g()
-f();//goi g()
-```
+    ```javascript
+    function g() {
+      console.log('g');
+    }
+    function f(x = g()) {
+    }
+    f(1);//khong goi g()
+    f();//goi g()
+    ```
 * Lazy expression la quá trình trì hoãn tính toán 1 biểu thức trong trường hợp này là biểu thức `x = g()` sẽ trì hoãn cho đến khi hàm f thực thi => hay vãi lúa
 ```javascript
 var x = 1;
@@ -385,12 +381,12 @@ var y = [4, 5];
 var z = [0, ...x, ...y ]; // spread out
 ```
 * là 2 cách dùng mang tính tương phản
-    * khi dùng làm rest param => gộp các individual thành 1 group
-    * khi là spread operater nó phân tách 1 nhóm ra các individual
+    * khi dùng làm rest parameter syntax => gộp các individual thành 1 group
+    * khi là spread syntax nó phân tách 1 nhóm ra các individual
 ## 1.6.7 In which way the … operator is used in following code
 ```javascript
-const f=(...arr)=>arr;
-const g= ()=>{
+const f = (...arr) => arr;
+const g = () => {
     var a1 = [2, 4];
     var a2 = [6, 8, 10, 12];
     a1.pop();
@@ -401,7 +397,13 @@ console.log(g().join("") === "281012"); // must print true
 ```
 cach 2
 ```javascript
-const f=(...arr)=>arr,g= ()=>{const a1 = [2, 4],a2 = [6, 8, 10, 12],[d]=a1,[,...dnd]=a2; return f(d,...dnd);}
+let f = (...arr)=> arr,
+let g = () =>{
+    const a = [2, 4],
+    b = [6, 8, 10, 12],
+    [a1] = a1,
+    [,...b1] = a2;
+    return f(d,...dnd);} //rest parameter
 console.log(g().join("") === "281012"); // true
 ```
 
@@ -414,21 +416,19 @@ console.log(g().join("") === "281012"); // true
 5. Bản chất để lấy giá trị của tham số truyền vào (xây dụng theo đúng cấu trúc của dữ liệu truyền vào)
 
 #### 1.7.1 What is destructuring ?
-    ```
-    // ES5
-    var arr = [1,2,3,4];
-    var a = arr[1]
-    var b = arr[2]
-    var c = arr[3]
-    var d = arr[4]
+    - Khi khai quat cấu trúc của một dữ liệu và lấy ra những giá trị mong muốn  
+   ```javascript
+    arr = [1, 2, 3, 4, [5,6,7,8], [9, 10]]
+    
+    var [, , , , [x], [y]] = arr;
 
-    // ES6
-    var [a = 2,b = 1,c,d] = arr
-    ```
+    x === 5 // true
+    y === 9 // true
+```
 
 #### 1.7.2 Can you use destructuring and default values together ? Provide example?
-    ```
-    Có thể vừa phân tán vừa gán giá trị ban đầu
+ ```javascript
+    // Có thể vừa phân tán vừa gán giá trị ban đầu
     function f({ a: x, b: y, c: { d: z } = {} }) {
         console.log(x, y, z)
     }
@@ -441,7 +441,7 @@ console.log(g().join("") === "281012"); // true
         }
     }
     f(obj) // 20, undefined, object
-    ```
+```
 
 #### 1.7.3 Dumping values: provide example that extract the 3rd element in an array and don't care about the 1st, 2nd element ? Provide example that swap 2 numbers ?
 
