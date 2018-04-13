@@ -50,7 +50,7 @@ Do ES6 mới ra đời trong năm 2015 nên nó chưa được hỗ trợ hoàn 
     ```javascript
     //1. Ngắn ngọn hơn
     //2. This đc xác định tại nơi hàm đc khai báo
-    //3. var obj = {
+     var obj = {
          a: 10,
          method: function method() {
            setTimeout(function () {
@@ -415,6 +415,14 @@ console.log(g().join("") === "281012"); // true
 4. Miểu tả cấu trúc của array + lấy giá trị của mảng (phù hợp với khi lấy API về, lấy giá trị )
 5. Bản chất để lấy giá trị của tham số truyền vào (xây dụng theo đúng cấu trúc của dữ liệu truyền vào)
 
+    - Được xác định nhờ context của
+    ```javascript
+    import React, { Component } from 'react'
+    
+    
+    ``` 
+    
+    
 #### 1.7.1 What is destructuring ?
     - Khi khai quat cấu trúc của một dữ liệu và lấy ra những giá trị mong muốn  
    ```javascript

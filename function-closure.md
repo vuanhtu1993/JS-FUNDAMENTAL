@@ -35,7 +35,20 @@ khai báo hàm lên đầu tiên, sau đó là các khai báo biến (chỉ khai
 ### What is Nested Scope?
 -
 ### What is Lexical Scope?
-- Được xác định tại nơi khai báo function đó
+- Là scope khai báo function 
+```javascript
+    function a() {
+      var x = [];
+      return {
+          b: function() {
+            console.log(x);
+          }
+      }
+    }
+    /* function a là lexical scope của function b 
+       lexical scope trái ngược với dynamic scope
+    */
+```
 ### What is Closure Scope?
    Xét ví dụ sau:
    ```

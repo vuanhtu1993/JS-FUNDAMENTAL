@@ -137,4 +137,23 @@ phụ thuộc vào cách gọi hàm đó
 Có một object tên là o1, object o2 được tạo mới từ object o1.  Vì o2 được tạo ra từ o1 nên nó có cùng thuộc tính với o1 nên khi câu lệnh
 console.log(o2.a) ta được kết quả trả về là 2. Khi ta thay đổi thuộc tính của o1 thì thuộc tính của o2 cũng thay đổi vì vậy khi chạy câu lệnh console.log(o2.a) ta được kết quả là 10.
 * Tìm hiểu về **Object.prototype**<br>
-Prototype là một đối tượng của object. Tất cả object đều có 1 prototype  và các object này kế thừa thuộc tính và phương thức từ prototype của mình. Prototype của String là String.prototype, Number là Number.prototype
+Prototype là một thuộc tính của object. Tất cả object đều có 1 prototype  và các object này kế thừa thuộc tính và phương thức từ prototype của mình. Prototype của String là String.prototype, Number là Number.prototype
+
+Là một ... đặc biệt trong js, mỗi object đều có thuộc tính prototype 
+    let a = [], hoặc a = {}
+    a.a // sẽ tìm trong object có pros a hay không, nếu không tìm trong prototype của a
+#### Prototype được ví dụ như sau:
+```javascript
+   let Cha = function() {
+     name: "Cha";
+   }
+   let Con = function() {}
+   // kế thừa
+   Con.prototype = new Cha();
+   // tạo instance của Con
+   let con1  = new Con();
+   // prototype là để kế thừa
+   con1.name // undefined 
+   Cha.prototype.character = "kind";
+   con1.character // = "kind" vậy 
+```
