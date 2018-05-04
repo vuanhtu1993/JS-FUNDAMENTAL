@@ -225,3 +225,55 @@
    ```
    method finally() trả về một Promise. Hàm finally truyền vào 1 callback thực thi một hành động nào đó sau khi Promise đã được xử lý xong.
    ```
+ ### Async await and Promise emxample
+ ```javascript
+ const wait = (data, time) => {
+	return new Promise((resolve, reject) => {
+		setTimeout(() => {
+			console.log(data);
+      resolve(data);
+		}, time)
+	})
+};
+
+const waitReject = (data, time) => {
+	return new Promise((resolve, reject) => {
+		setTimeout(() => {
+			reject(data);
+		}, time)
+	})
+};
+
+
+- Promise, giai quyết được vấn đề: 
+1. trình tự thực hiện công việc trước sau thông qua phương thức .then
+Các vấn đề chưa giải quyết được :
+2. Nhưng nếu thực hiện việc truyền dữ liệu sau khi trả về thì phải sử dụng callback lồng nhau trong then(() => cb2)
+3. Hoặc truyền dữ liệu từ hàm thứ 1 đến hàm thứ 3 là khó khăn
+ const asyncFn = () => {
+   	wait('abc', 1000)
+ 			.then(() => wait('xyz', 1000))
+ 			.then(() => wait('123', 1000))
+ 			.then(() => waitReject('xxx', 1000))
+			 .then(() => wait('anhtus', 1000))
+ 			.catch((err) => console.log(err))
+};
+
+--Async await, viết code bất đồng bộ theo phong cách đồng bộ (bao gồm cả try catch), 
+Giải quyết được vấn đề 
+1. Trình tự thực hiện công việc trước sau 
+2. truyền dữ liệu dễ dàng hơn bao giờ (chỉ cần đợi await trả về dữ liệu thì truyền vào await tiếp theo *cười sướng*)
+3. Truyền dữ liêu từ hàm thứ 1 đến 3,4,5 easy way *fucking magic*
+const asyncFn = async () => {
+	try {
+		await wait('abc', 1000);
+		await wait('xyz', 1000);
+		await waitReject('123', 1000);
+		await wait('anhtus', 1000);
+	} catch (err) {
+		console.log(err);
+	}
+};
+
+asyncFn();
+ ```
