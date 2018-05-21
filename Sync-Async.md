@@ -11,7 +11,7 @@
 ## 1.2 setTimeOut là một hàm bất đồng bộ của JS
   * Cho hàm setTimeout có định nghĩa như sau: https://www.w3schools.com/jsref/met_win_settimeout.asp
   * Set đoạn code sau, hãy mô tả chính xác những gì xảy ra và kết quả in ra là gì ?
-  ```
+  ```javascript
   console.log('Hi');
 
   setTimeout(function () {
