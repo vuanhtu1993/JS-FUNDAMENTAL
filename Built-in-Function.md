@@ -1,3 +1,48 @@
+- Nếu tôi có 1 mảng và tôi muốn xử lý từng biến trong mảng theo cùng 1 cách, trả về các giá trị sau xử lý (số lượng đúng bằng số lượng phần tử ban đầu của mảng) thì tôi sẽ sử dụng map.
+```javascript
+class Animal {
+  constructor(name) {
+    this.name = name;
+  }
+}
+let arr = [
+  new Animal("dog"),
+  new Animal("rhino"),
+  new Animal("bird"),
+  new Animal("cat"),
+];
+let arrMap = arr.map((obj) => {
+  obj.name = "hi" + obj.name;
+  // Phai co return, nhung cai gi return se dc gan vao mang arrMap
+  return obj;
+})
+```
+- Nếu tôi đã có 1 mảng nhưng tôi chỉ muốn lấy các phần tử theo 1 tiêu chuẩn nhất định, tôi sử dụng filter.
+```javascript
+class Animal {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age
+  }
+}
+let arr = [
+  new Animal("dog", 1),
+  new Animal("rhino", 2),
+  new Animal("bird", 2),
+  new Animal("cat", 1),
+];
+let arrFilter = arr.filter((obj) => {
+  if (obj.age > 1) {
+    // nhung obj nao return true se duoc gan vao arrFilter
+    return true;
+  }
+  return false;
+})
+```
+
+
+- Nếu tôi đã có 1 mảng nhưng tôi muốn sử dụng các giá trị trong mảng để tạo ra vài thứ khác hoàn toàn mới, tôi sử dụng reduce.
+
 ### Reduce
 >Syntax arr.reduce(callback, [initialValue])
 
@@ -12,7 +57,7 @@ const cb = (accumulator, currentValue) {
 - currentValue là các item trong mảng (duyệt từ đầu đến cuối mảng)
 - initial là giá trị ban đầu của accumulator
 > Nếu không có initialValue thì accumulator nhận giá trị đầu của mảng và currentValue nhận giá trị thứ 2 của mảng
-#### Example
+##### Example
 - Flatten Array
 ```javascript
 let arr = [[1,2], [3,4], [5,6]];
