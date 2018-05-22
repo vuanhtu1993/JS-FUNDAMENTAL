@@ -1,3 +1,4 @@
+### Map
 - Nếu tôi có 1 mảng và tôi muốn xử lý từng biến trong mảng theo cùng 1 cách, trả về các giá trị sau xử lý (số lượng đúng bằng số lượng phần tử ban đầu của mảng) thì tôi sẽ sử dụng map.
 ```javascript
 class Animal {
@@ -17,6 +18,7 @@ let arrMap = arr.map((obj) => {
   return obj;
 })
 ```
+### Filter
 - Nếu tôi đã có 1 mảng nhưng tôi chỉ muốn lấy các phần tử theo 1 tiêu chuẩn nhất định, tôi sử dụng filter.
 ```javascript
 class Animal {
