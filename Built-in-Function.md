@@ -110,7 +110,7 @@ function groupBy(objArr, property) {
 
 console.log(groupBy(people, "age"));
 ```
-- Revome duplicate
+- Revome duplicate value in array
 ```javascript
 let arr = [1, 2, 1, 2, 3, 5, 4, 5, 3, 4, 4, 4, 4];
 //First way
@@ -136,7 +136,36 @@ function removeDuplicateItem(arr) {
 
 console.log(removeDuplicateItem(arr));
 ```
-
+- Remove duplicate ARRAY in array
+```javascript
+arr = [ [ '0', '3', '4', '8' ],
+  [ '0', '3', '4', '8' ],
+  [ '0', '3', '8' ],
+  [ '0', '3', '8' ],
+  [ '0', '3', '8' ],
+  [ '0', '3', '8' ],
+  [ '0', '3', '8' ],
+  [ '0', '3', '8' ],
+  [ '0', '3', '4', '8' ],
+  [ '0', '3', '8' ] ];
+let trips = arr.reduce((accumulator, currentValue) => {
+      if (accumulator.length <= 0) {
+        return [currentValue];
+      } else {
+        let count = 0;
+        for (let i = 0; i < accumulator.length; i++) {
+          if (JSON.stringify(currentValue) !== JSON.stringify(accumulator[i])) {
+            count ++;
+          }
+        }
+        if (count == accumulator.length) {
+          return [...accumulator, currentValue];
+        }
+        return accumulator;
+      }
+    },[]);
+    OUTPUT: trips // [ [ '0', '3', '4', '8' ], [ '0', '3', '8' ] ]
+```
 
 
 
