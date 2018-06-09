@@ -190,6 +190,25 @@ const MyButton = (<button>{1 + 5}</button>)
 ## 1.8 Props Validation [0%]
   * [ ] Understand what is validation <br>
   Validation props dùng để chắc chắn kiểu dữ liệu của props. Nếu kiểu dữ liệu của props không đúng thì sẽ có cảnh báo.
+  *Nếu bạn khai báo được PropTypes như trên, trước hết bạn có thể đạt được những lợi ích sau:
+
+ 1. Bạn có thể bắt lỗi dễ dàng các vấn đề liên quan đến truyền sai loại dữ liệu giữa các component
+ 2. Những nguời sử dụng component của bạn có thể biết rõ loại dữ liệu được truyền vào cho component ở một vị trí duy nhất (không phải đọc hiểu cách sử dụng thông qua những chỗ gọi đến component)
+ 3. Một số trình soạn thảo có thể hỗ trợ tốt việc sử dụng component như thế nào, ví dụ khi bạn gõ tên component trình soạn thảo sẽ hiển thị cho bạn biết bạn cần truyền vào những gì loại dữ liệu như thế nào.
+ ```javascript
+ import React from 'react';
+ import PropTypes from 'prop-types';
+ const Person = (props) => <div>
+   <h1>{props.firstName} {props.lastName}</h1>
+   {props.country ? <p>Country: {props.country}</p> : null}
+ </div>;
+ Person.propTypes = {
+   firstName:PropTypes.string,
+   lastName:PropTypes.string,
+   country:PropTypes.string
+ };
+ export default Person;
+ ```
   * [ ] Know how to validate Props in React <br>
   Để validate props trong react sử dụng propTypes.
   ```
@@ -207,6 +226,62 @@ const MyButton = (<button>{1 + 5}</button>)
     name: PropTypes.string
   };
   ```
+  * Cách trường hợp sử dụng propTypes nâng cao hơn
+   1. Xác thực loại dữ liệu:
+   ```javascript
+   Person.propTypes = {
+   email: PropTypes.string,
+   age: PropTypes.number,
+   worksRemote: PropTypes.bool,
+   updateCallback: PropTypes.func
+  
+  // hoặc
+  PropTypes.array,
+  PropTypes.arrayOf(PropTypes.string),
+  PropTypes.object,
+  PropTypes.objectOf(PropTypes.number)
+  
+  // Dữ liệu phức tạp
+    Person.propTypes = {
+    car: PropTypes.shape({
+      registrationNumber: PropTypes.string,
+      year: PropTypes.number
+    })
+  }
+}
+   ```
+   2. Định nghĩa các giá trị hợp lệ của props
+   ```javascript
+   Person.propTypes = {
+   gender: PropTypes.oneOf([
+     'female', 'male'
+   ])
+   }
+   // hoặc kiểu props
+   PropTypes.oneOfType([
+   PropTypes.string,
+   PropTypes.number
+   ])
+   ```
+   3. Khai báo props bắt buộc
+   ```javascript
+    const Person = (props) => <div>
+    <h1>{props.firstName} {props.lastName}</h1>
+    {props.country ? <p>Country: {props.country}</p> : null}
+  </div>;
+  Person.propTypes = {
+    firstName:PropTypes.string.isRequired,
+    lastName:PropTypes.string.isRequired,
+    country:PropTypes.string
+  };
+   ```
+   4. Khai báo props mặc định
+   Bên cạnh đó bạn có thể khởi tạo giá trị props mặc định cho component. Bạn có thể khởi tạo thông qua defaultProps của component ví dụ
+   ```javascript
+   Person.defaultProps = {
+   country: 'Austria'
+   }
+   ```
 ## 1.9 Component Lifecycle Methods [%]
   * [ ] Understand what is lifecycle methods <br>
   Các component sẽ có một số lifecycle cho phép thực hiện một tác vụ nào đó tại một thời điểm cụ thể. Có 3 giai đoạn trong một vòng đời của một component: Mounting, Update and Unmounting.
