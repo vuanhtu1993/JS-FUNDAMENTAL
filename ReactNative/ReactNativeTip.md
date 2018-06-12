@@ -69,3 +69,5 @@ Cách 2: Lấy Header đã viết sẵn của react navigation
 ```
 >Xong issue đầu tiên, khó quá chừng hầy. Nhưng mà ngon phết
 
+## Expanding and Collapsing Elements 
+-Link: https://moduscreate.com/blog/expanding-and-collapsing-elements-using-animations-in-react-native/
