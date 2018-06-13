@@ -70,7 +70,7 @@ npm i react-native-extended-stylesheet --save
       }
     }
   });
-  
+  LƯU Ý: NẾU KHÔNG ĂN EStyleSheet THÌ THÊM EStyleSheet.build(); VÀO NGAY SAU.
   // use styles as usual
   class MyComponent extends React.Component {
     render() {
