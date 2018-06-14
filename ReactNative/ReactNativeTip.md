@@ -187,7 +187,7 @@ export default Panel;
 ## Custom Every Component Easier
 - Concept: Hầu hết các native conponent của 'react-native' đều có props là style (Điều này cũng đúng với 'native-base')
 nên ta sẽ dựa vào cái này để xây dựng các custom component
-```javascipt
+```javascript
 	import PropTypes from ‘prop-types’;
 	import React, { Component } from 'react';
 	import { Text, TouchableOpacity } from 'react-native';
