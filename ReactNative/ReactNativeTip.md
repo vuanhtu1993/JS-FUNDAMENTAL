@@ -184,3 +184,42 @@ var styles = StyleSheet.create({
 
 export default Panel;
 ```
+## Custom Every Component Easier
+- Concept: Hầu hết các native conponent của 'react-native' đều có props là style (Điều này cũng đúng với 'native-base')
+nên ta sẽ dựa vào cái này để xây dựng các custom component
+```javascipt
+	import PropTypes from ‘prop-types’;
+	import React, { Component } from 'react';
+	import { Text, TouchableOpacity } from 'react-native';
+	class CustomText extends Component {
+	  static propTypes = {
+	    children: PropTypes.string.isRequired,
+	    textStyles: PropTypes.oneOfType([
+	      PropTypes.array,
+	      PropTypes.number,
+	      PropTypes.shape({}),
+	    ]).isRequired,
+	    buttonStyles: PropTypes.oneOfType([
+	      PropTypes.array,
+	      PropTypes.number,
+	      PropTypes.shape({}),
+	    ]).isRequired,
+	  }
+	render = () => {
+	    const { textStyles, buttonStyles, children } = this.props;
+	    return (
+	      <TouchableOpacity style={buttonStyles}>
+		<Text style={textStyles}>{children}</Text>
+	      </TouchableOpacity>
+	    );
+	  }
+	}
+	export default CustomText;
+	########################################
+	import CustomText from ...
+	<CustomText
+	  buttonStyles={styles.buttonStyles}
+	  textStyles={styles.textStyles}>
+	    This is some custom text
+	</CustomText>
+```
