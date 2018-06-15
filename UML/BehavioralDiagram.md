@@ -10,7 +10,7 @@ Biểu đồ tương tác: là chỉ ra sự tương tác giữa các đối tư
  * Đối tương thực thể (Entity): thông tin trong CSDL
  * Đối tượng biên(Boundary): Form, cửa sổ ứng dụng 
  * Đối tượng điều khiển(Control): Điều phối các đối tượng khác, điều khiển luồng Logic
-3. Tìm kiếm tác nhân: 
+- Tìm kiếm tác nhân: 
 * Tác nhân trong biểu đồ tương tác là sự kích hoạt từ ngoài để khởi động luồng công việc của luồng sự kiện. Tìm kiếm tác nhân bằng cách hỏi ai hay cái gì khởi xướng tiến trình
 * Có thể có nhiều tác nhân cho một biểu đồ tương tác
 * Nếu tác nhân nhận hay gửi thông điệp cho hệ thống theo kịch bản nào đó thì chúng phải có mặt trong biểu đồ tương tác của kịch bản đó
