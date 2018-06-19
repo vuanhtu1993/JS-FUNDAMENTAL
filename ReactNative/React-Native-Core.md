@@ -190,5 +190,65 @@ class DetailsScreen extends React.Component {
 }
 ```
 
+## React Native Animation
+- Animation rất quan trọng cho trải nghiệm người dùng, thông thường thì các đối tượng chuyển động have momentum rarely come a stop ngay lập tức, mà nó sẽ chuyển động theo quản tính. RN cung cấp 2 hệ thống animation bổ xung: Animated for granular and interactive control of specific values, and LayoutAnimation for animated global layout transactions.
+#### Animated API
+- The Animated API is designed to make it very easy to (concisely express) thể hiện ngắn ngon a wide variety of interesting animation and (interaction patterns) tương tác mẫu in a very performant way. Animated focuses on declarative relationships between inputs and outputs. With configurable transforms in between (Với cấu hình thay đổi ở giữa), and simple start/stop methods to control time-based animation execution.
+- Animated exports four animatable component types: View, Text, Image, and ScrollView, but you can also create your own using Animated.createAnimatedComponent().
+
+For example, a container view that fades in when it is mounted may look like this:
+```javascript
+import React from 'react';
+import { Animated, Text, View } from 'react-native';
+
+class FadeInView extends React.Component {
+  state = {
+    fadeAnim: new Animated.Value(0),  // Initial value for opacity: 0
+  }
+
+  componentDidMount() {
+    Animated.timing(                  // Animate over time
+      this.state.fadeAnim,            // The animated value to drive
+      {
+        toValue: 1,                   // Animate to opacity: 1 (opaque)
+        duration: 10000,              // Make it take a while
+      }
+    ).start();                        // Starts the animation
+  }
+
+  render() {
+    let { fadeAnim } = this.state;
+
+    return (
+      <Animated.View                 // Special animatable View
+        style={{
+          ...this.props.style,
+          opacity: fadeAnim,         // Bind opacity to animated value
+        }}
+      >
+        {this.props.children}
+      </Animated.View>
+    );
+  }
+}
+
+// You can then use your `FadeInView` in place of a `View` in your components:
+export default class App extends React.Component {
+  render() {
+    return (
+      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+        <FadeInView style={{width: 250, height: 50, backgroundColor: 'powderblue'}}>
+          <Text style={{fontSize: 28, textAlign: 'center', margin: 10}}>Fading in</Text>
+        </FadeInView>
+      </View>
+    )
+  }
+}
+```
+* Bước 1: Khởi tạo giá trị Animated.Value vào state (Input)
+* Bước 2: Cho vào hàm componentDidMount để setState cho trạng thái cần animation (Output)
+* Bước 3: Sử dụng fadeAnim ở bên trong Animated.View, Image, Text, ScrollView 
+This is done in an optimized way that is faster than calling setState and re-rendering.
+Because the entire configuration is declarative, we will be able to implement further optimizations that serialize the configuration and runs the animation on a high-priority thread.
 
 
