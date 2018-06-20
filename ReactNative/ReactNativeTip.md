@@ -223,3 +223,5 @@ nên ta sẽ dựa vào cái này để xây dựng các custom component
 	    This is some custom text
 	</CustomText>
 ```
+## Press and hold button action RN
+- Link: https://codedaily.io/tutorials/24/React-Native-Press-and-Hold-Button-Actions
