@@ -341,3 +341,5 @@ var styles = StyleSheet.create({
 
 AppRegistry.registerComponent('SampleApp', () => AnimatedButtonPress);
 ```
+## Series Building with React Native
+- Link: https://medium.com/building-with-react-native
