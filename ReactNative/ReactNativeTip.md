@@ -343,3 +343,39 @@ AppRegistry.registerComponent('SampleApp', () => AnimatedButtonPress);
 ```
 ## Series Building with React Native
 - Link: https://medium.com/building-with-react-native
+
+## Draw shape in React Native 
+- Link https://www.npmjs.com/package/react-native-art-extra
+```javascript
+import React from 'react';
+import ART from 'react-native-art-extra';
+import {Text, View} from "react-native";
+import {responsiveHeight} from "../../../public/ShareComponent/Dimension";
+
+const {Surface, Group, Shape, Circle, Transform} = ART;
+const style = {
+  fill: '#40a8a7' ,
+  stroke: '#ddd' ,
+  strokeWidth: 2,
+  strokeCap: 'square',
+  strokeJoin: 'miter',
+};
+
+class BubbleChart extends React.Component {
+  render () {
+    return (
+      <View>
+        <Text>Abc</Text>
+        <Surface width={responsiveHeight(100)} height={400}>
+          <Circle {...style} cx={100} cy={100} r={70}/>
+          <Circle {...style} cx={220} cy={80} r={50}/>
+          <Circle {...style} cx={180} cy={180} r={40}/>
+          <Circle {...style} cx={250} cy={160} r={30}/>
+        </Surface>
+      </View>
+    );
+  }
+}
+
+export default BubbleChart;
+```
