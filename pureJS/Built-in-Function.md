@@ -1,4 +1,4 @@
-### Map
+## Map
 - Nếu tôi có 1 mảng và tôi muốn xử lý từng biến trong mảng theo cùng 1 cách, trả về các giá trị sau xử lý (số lượng đúng bằng số lượng phần tử ban đầu của mảng) thì tôi sẽ sử dụng map.
 ```javascript
 class Animal {
@@ -18,7 +18,7 @@ let arrMap = arr.map((obj) => {
   return obj;
 })
 ```
-### Filter
+## Filter
 - Nếu tôi đã có 1 mảng nhưng tôi chỉ muốn lấy các phần tử theo 1 tiêu chuẩn nhất định, tôi sử dụng filter.
 ```javascript
 class Animal {
@@ -41,11 +41,26 @@ let arrFilter = arr.filter((obj) => {
   return false;
 })
 ```
+#### Sử dụng filter để query nhiều trường trong object
+- Lưu ý syntax của filter trong doc
+> var newArray = arr.filter(callback(element[, index[, array]]), argument2)
+- Trong đó argument2 sẽ được dùng là this trong callback
+```javascript
+	var users = [{name: 'John',email: 'johnson@mail.com',age: 25,address: 'USA'},
+		     {name: 'Tom',email: 'tom@mail.com',age: 35,address: 'England'},
+		     {name: 'Mark',email: 'mark@mail.com',age: 28,address: 'England'}];
 
+	var query = {address: "England", name: "Mark"};
 
+	function search(user){
+	  return Object.keys(this).every((key) => user[key] === this[key]);
+	}
+	
+	var result = users.filter(search, query);
+```
+
+## Reduce
 - Nếu tôi đã có 1 mảng nhưng tôi muốn sử dụng các giá trị trong mảng để tạo ra vài thứ khác hoàn toàn mới, tôi sử dụng reduce.
-
-### Reduce
 >Syntax arr.reduce(callback, [initialValue])
 
 Trong đó callback là một function dạng như sau:
@@ -59,7 +74,7 @@ const cb = (accumulator, currentValue) {
 - currentValue là các item trong mảng (duyệt từ đầu đến cuối mảng)
 - initial là giá trị ban đầu của accumulator
 > Nếu không có initialValue thì accumulator nhận giá trị đầu của mảng và currentValue nhận giá trị thứ 2 của mảng
-##### Example
+#### Example
 - Flatten Array
 ```javascript
 let arr = [[1,2], [3,4], [5,6]];
