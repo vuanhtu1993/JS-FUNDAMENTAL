@@ -379,3 +379,5 @@ class BubbleChart extends React.Component {
 
 export default BubbleChart;
 ```
+## Deploy the Android apps
+- Link: https://android.jlelse.eu/preparing-a-reach-native-android-app-for-production-f063413d5633
