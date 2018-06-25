@@ -381,3 +381,70 @@ export default BubbleChart;
 ```
 ## Deploy the Android apps
 - Link: https://android.jlelse.eu/preparing-a-reach-native-android-app-for-production-f063413d5633
+
+## React Native scalling
+- Link: https://blog.solutotlv.com/size-matters/
+#### Method 1:Flex
+```javascript
+const FlexExample = () =>
+    <View style={[styles.container, {flex: 1}]}>
+        <View style={{flex: 16}}/> 
+        <View style={{flexDirection: 'row', flex: 68}}>
+            <View style={{flex: 1}}/>
+            <View style={[styles.box, {flex: 8}]}>
+                <Text style={styles.title}>Awesome Blog Post Page</Text>
+                <Text style={styles.text}>{loremIpsum}</Text>
+                <View style={styles.buttonsContainer}>
+                    <TouchableOpacity style={styles.button}>
+                        <Text style={styles.buttonText}>Accept</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.button}>
+                        <Text style={styles.buttonText}>Decline</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
+            <View style={{flex: 1}}/>
+        </View>
+        <View style={{flex: 16}}/>
+    </View>;
+```
+#### Method 2: Viewport Units
+```javascript
+import { Dimensions } from 'react-native';
+
+const { height, width } = Dimensions.get('window');
+
+export const responsiveHeight = h => height * (h / 100);
+
+export const responsiveWidth = w => width * (w / 100);
+
+export const responsiveFontSize = f =>
+  Math.sqrt(height * height + width * width) * (f / 100);
+
+//////////////////
+///StyleSheet
+/////////////////
+const styles = StyleSheet.create({
+    container: {
+        ...
+    },
+    box: {
+        width: responsiveWidth(80),
+        height: responsiveHeight(67),
+        padding: responsiveWidth(2.6),
+        ...
+    },
+    title: {
+        fontSize: responsiveFontSize(5.3),
+        marginBottom: responsiveWidth(2.6),
+        fontWeight: 'bold',
+        color: 'black'
+    },
+    text: {
+        fontSize: responsiveWidth(3.6),
+        color: 'black'
+    },
+});
+
+```
+#### Method 3:
