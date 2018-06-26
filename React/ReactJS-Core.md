@@ -546,16 +546,19 @@ console.log(gen.next().value); // 3
 ### 1.6.5 Understand fork, take, race, put, call, select, takeLatest, takeEvery
 
 # CÁC LƯU Ý QUAN TRỌNG:
-* Các kĩ thuật quản lí trạng thái 
+### Các kĩ thuật quản lí trạng thái 
 1. Lift state up
 2. Redux
-3. Context API
+### Context API
 * Các kĩ thuật để reusable code
 1. Render props
 2. 
-* Các kĩ thuật tạo hiệu ứng
+### Các kĩ thuật tạo hiệu ứng
 1. Higher order component (spiner)
 2. 
 3.
+### Các kĩ thuật khác:
+1. Function as Child component
+2. React Children API
 
 
