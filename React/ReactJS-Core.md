@@ -187,7 +187,7 @@ const MyButton = (<button>{1 + 5}</button>)
     document.getElementById('root')
   );
   ```
-## 1.8 Props Validation [0%]
+## 1.8 PropTypes (props validation) [0%]
   * [ ] Understand what is validation <br>
   Validation props dùng để chắc chắn kiểu dữ liệu của props. Nếu kiểu dữ liệu của props không đúng thì sẽ có cảnh báo.
   *Nếu bạn khai báo được PropTypes như trên, trước hết bạn có thể đạt được những lợi ích sau:
@@ -312,25 +312,83 @@ const MyButton = (<button>{1 + 5}</button>)
   * [ ] Understand componentDidMount = where you do DOM manipulation & AJAX request <br>
   * [ ] Understand componentWillMount = clean up after your React components gets destroyed <br>
   * [ ] Practice: create a Component that have 7 lifecycle methods and observe the behaviour <br>
-## 1.10 Forms [%]
-  * [ ] Understand how to to forms in React <br>r
-## 1.11 Events [%]
-  * [ ] Understand how to handle events in React such as: click event on a button, keypress event on a input <br>
-  Handle event trong React tương tự như handle event trong DOM. Tuy nhiên có một số điểm khác biệt:
-  - Tên event được viết theo kiểu camelCase: onClick, onChange...
-  - Các hàm xử lí sự kiện được để bên trong cặp dấu ngoặc nhọn {}. onClick={handleClick}
-## 1.12 Refs [%]
+## 1.10 Refs [%]
   * [ ] Understand refs = how to access DOM nodes within your React Component (https://reactjs.org/docs/refs-and-the-dom.html#the-ref-string-attribute) <br>
   refs dùng để tham chiếu đến một node DOM hoặc là một thể hiện của một component. refs sẽ trả về một node mà chúng ta tham chiếu đến. refs được sử dụng trong một số trường hợp:
   - Managing focus, text selection, or media playback.
   - Khi sử dụng animation.
   - Sử dụng với các thư viện DOM thứ ba.
   * [ ] Practice use refs to access a div and change style add text to it <br>
-## 1.13 Mixins [0%]
-  * [ ] Understand mixins = reuse methods across multiple components (https://reactjs.org/docs/components-and-props.html#mixins) <br>
-## 1.14 Practice [0%]
-  * [ ] Build Countdown app using React
-  * [ ] Build Todo app using React
+## 1.11 Render props
+* Nói theo cách hiểu: là một kĩ thuật để truyền props từ component này sang một component khác nhưng KHÔNG PHẢI là từ cha xuống con mà là 2 component bằng cấp. DÙNG ĐỂ TẮNG TÍNH TÁI SỬ DỤNG CODE
+```javascript
+class Cat extends React.Component {
+  render() {
+    const mouse = this.props.mouse;
+    return (
+      <img src="/cat.jpg" style={{ position: 'absolute', left: mouse.x, top: mouse.y }} />
+    );
+  }
+}
+
+class Mouse extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleMouseMove = this.handleMouseMove.bind(this);
+    this.state = { x: 0, y: 0 };
+  }
+
+  handleMouseMove(event) {
+    this.setState({
+      x: event.clientX,
+      y: event.clientY
+    });
+  }
+
+  render() {
+    return (
+      <div style={{ height: '100%' }} onMouseMove={this.handleMouseMove}>
+
+        {/*
+          Instead of providing a static representation of what <Mouse> renders,
+          use the `render` prop to dynamically determine what to render.
+        */}
+        {this.props.render(this.state)}
+      </div>
+    );
+  }
+}
+
+class MouseTracker extends React.Component {
+  render() {
+    return (
+      <div>
+        <h1>Move the mouse around!</h1>
+        <Mouse render={mouse => (
+          <Cat mouse={mouse} />
+        )}/>
+      </div>
+    );
+  }
+}
+```
+* Nhận xét: Trong component Mouse có phương thức handleMouseMove() để xác định đc ví trị của mouse, ở trong component Cat cần phải sử dụng phương thức handleMouseMove() để có thể bắt được mouse. Câu chuyện đc đặt ra là làm sao để không cần phải viết lại phương thức handleMouseMove() ở trong component Cat mà vẫn xác định được ví trị của mouse. Có 2 cách có thể làm được 
+1. Viết component <Cat/> ở bên trong component <Mouse/>
+2. Sử dụng Render props (copy code phía trên)
+``` javascript
+class MouseTracker extends React.Component {
+  render() {
+    return (
+      <div>
+        <h1>Move the mouse around!</h1>
+        <Mouse render={mouse => (
+          <Cat mouse={mouse} />
+        )}/>
+      </div>
+    );
+  }
+}
+```
   
 # 1 Concept Part 2
 ## 1.1 API Security
@@ -486,4 +544,18 @@ console.log(gen.next().value); // 3
 ```
 ### 1.6.4 Understand effect
 ### 1.6.5 Understand fork, take, race, put, call, select, takeLatest, takeEvery
+
+# CÁC LƯU Ý QUAN TRỌNG:
+* Các kĩ thuật quản lí trạng thái 
+1. Lift state up
+2. Redux
+3. Context API
+* Các kĩ thuật để reusable code
+1. Render props
+2. 
+* Các kĩ thuật tạo hiệu ứng
+1. Higher order component (spiner)
+2. 
+3.
+
 
