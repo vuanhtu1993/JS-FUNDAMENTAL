@@ -1,3 +1,17 @@
+## React Native
+#### 1. ScrollView
+- Lưu ý: Scroll View cần phải có chiều cao giới hạn để có thể làm việc được. Nhưng đa số các trang có thanh cuột đều chứa các thành phần con có chiều cao ko giới hạn. Để sử dụng đc Scroll View cần phải either fixed chiều cao của ScrollView (không khuyên khích) or chắc rằng chiều con của các thành phần con được bound height. Không dùng {flex: 1} trong scrollview vì gây lỗi
+```javascript
+scrollView: {
+<ScrollView contentContainerStyle={styles.scrollView}>
+  .... contents
+</ScrollView>
+scrollView: {
+    backgroundColor: 'blue',
+    alignItems: 'center'
+  },
+```
+
 ## React Navigation
 - Concept cửa Navigation trong web và RN là khác nhau
 - Web browser có một history stack, khi người dùng trỏ vào anchor <a> thì url sẽ đc push vào stack này, khi người dùng click back thì stack sẽ pop url cuối cùng ra
