@@ -68,8 +68,9 @@ Cách 2: Lấy Header đã viết sẵn của react navigation
 	}
 ```
 >Xong issue đầu tiên, khó quá chừng hầy. Nhưng mà ngon phết
-
-## Expanding and Collapsing Elements 
+## Expanding and Collapsing Elements (lib)
+- Link: https://github.com/oblador/react-native-collapsible
+## Expanding and Collapsing Elements (Tự viết nhưng chưa chạy đc trên IOS)
 - Link: https://moduscreate.com/blog/expanding-and-collapsing-elements-using-animations-in-react-native/
 
 ## Expanding and Collapsing Panel apply animation 
