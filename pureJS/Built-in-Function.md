@@ -247,9 +247,10 @@ const union = (a, b) => Array.from(new Set([...a, ...b]));
 Examples:
 
 union([1, 2, 3], [4, 3, 2]); // [1,2,3,4]
-VII: take
-Trả về 1 mảng chứa số phần tử yều cầu tính từ phần tử đầu tiên
-
+```
+### VII: take
+> Trả về 1 mảng chứa số phần tử yều cầu tính từ phần tử đầu tiên
+```javascript
 const take = (arr, n = 1) => arr.slice(0, n);
 Examples:
 
