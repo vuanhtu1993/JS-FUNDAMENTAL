@@ -1,5 +1,28 @@
 ## React Native
-#### 1. ScrollView
+## 1. Life circle
+#### Mounting
+These below methods are called in the following order when an instance of a component is being created and inserted into the DOM:
+
+1. constructor()
+2. static getDerivedStateFromProps()
+3. render()
+4. componentDidMount()
+#### Updating
+An update when needed can be caused by changes to the props or the state. The below methods are called in the following order when a component is being re-rendered:
+1. static getDerivedStateFromProps()
+2. shouldComponentUpdate()
+3. render()
+4. getSnapshotBeforeUpdate()
+5. componentDidUpdate()
+#### Unmounting
+This method is called when a component is being removed from the DOM:
+1. componentWillUnmount()
+#### Error Handling
+This method is called when there is an error during rendering, in a lifecycle method, or in the constructor of any child component.
+
+1. componentDidCatch()
+Note: Instance properties can be set by using props or state.
+## 2. ScrollView
 - Lưu ý: Scroll View cần phải có chiều cao giới hạn để có thể làm việc được. Nhưng đa số các trang có thanh cuột đều chứa các thành phần con có chiều cao ko giới hạn. Để sử dụng đc Scroll View cần phải either fixed chiều cao của ScrollView (không khuyên khích) or chắc rằng chiều con của các thành phần con được bound height. Không dùng {flex: 1} trong scrollview vì gây lỗi
 ```javascript
 scrollView: {
