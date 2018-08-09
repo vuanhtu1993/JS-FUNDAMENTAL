@@ -271,3 +271,129 @@ The ReturnValues parameter instructs DynamoDB to return only the updated attribu
 ```
 To run the program, type the following command:
 node MoviesItemOps03.js
+
+## Update an Item (Conditionally)
+The following program shows how to use UpdateItem with a condition. If the condition evaluates to true, the update succeeds; otherwise, the update is not performed.
+
+In this case, the item is updated only if there are more than three actors in the movie.
+
+Copy and paste the following program into a file named MoviesItemOps05.js:
+```javascript
+var AWS = require("aws-sdk");
+
+AWS.config.update({
+  region: "us-west-2",
+  endpoint: "http://localhost:8000"
+});
+
+var docClient = new AWS.DynamoDB.DocumentClient()
+
+var table = "Movies";
+
+var year = 2015;
+var title = "The Big New Movie";
+
+// Conditional update (will fail)
+
+var params = {
+    TableName:table,
+    Key:{
+        "year": year,
+        "title": title
+    },
+    UpdateExpression: "remove info.actors[0]",
+    ConditionExpression: "size(info.actors) > :num",
+    ExpressionAttributeValues:{
+        ":num": 3
+    },
+    ReturnValues:"UPDATED_NEW"
+};
+
+console.log("Attempting a conditional update...");
+docClient.update(params, function(err, data) {
+    if (err) {
+        console.error("Unable to update item. Error JSON:", JSON.stringify(err, null, 2));
+    } else {
+        console.log("UpdateItem succeeded:", JSON.stringify(data, null, 2));
+    }
+});
+```
+To run the program, type the following command:
+
+node MoviesItemOps05.js
+
+The program should fail with the following message:
+
+The conditional request failed
+
+This is because the movie has three actors in it, but the condition is checking for greater than three actors.
+
+Modify the program so that the ConditionExpression looks like this:
+
+ConditionExpression: "size(info.actors) >= :num",
+The condition is now greater than or equal to 3 instead of greater than 3.
+
+Run the program again. The updateItem operation should now succeed.
+
+## Delete an Item
+You can use the delete method to delete one item by specifying its primary key. You can optionally provide a ConditionExpression to prevent the item from being deleted if the condition is not met.
+
+In the following example, you try to delete a specific movie item if its rating is 5 or less.
+
+Copy and paste the following program into a file named MoviesItemOps06.js:
+```javascript
+var AWS = require("aws-sdk");
+
+AWS.config.update({
+  region: "us-west-2",
+  endpoint: "http://localhost:8000"
+});
+
+var docClient = new AWS.DynamoDB.DocumentClient();
+
+var table = "Movies";
+
+var year = 2015;
+var title = "The Big New Movie";
+
+var params = {
+    TableName:table,
+    Key:{
+        "year": year,
+        "title": title
+    },
+    ConditionExpression:"info.rating <= :val",
+    ExpressionAttributeValues: {
+        ":val": 5.0
+    }
+};
+
+console.log("Attempting a conditional delete...");
+docClient.delete(params, function(err, data) {
+    if (err) {
+        console.error("Unable to delete item. Error JSON:", JSON.stringify(err, null, 2));
+    } else {
+        console.log("DeleteItem succeeded:", JSON.stringify(data, null, 2));
+    }
+});
+To run the program, type the following command:
+
+node MoviesItemOps06.js
+
+The program should fail with the following message:
+
+The conditional request failed
+
+This is because the rating for this particular movie is greater than 5.
+
+Modify the program to remove the condition from params.
+
+var params = {
+    TableName:table,
+    Key:{
+        "title":title,
+        "year":year
+    }
+};
+```
+Run the program again. Now, the delete succeeds because you removed the condition.
