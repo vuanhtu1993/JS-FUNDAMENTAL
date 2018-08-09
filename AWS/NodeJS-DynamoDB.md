@@ -1,4 +1,4 @@
-###  Create a Table
+##  Create a Table
 
 In this step, you create a table named Movies. The primary key for the table is composed of the following attributes:
 
@@ -52,3 +52,93 @@ The ProvisionedThroughput parameter is required, but the downloadable version of
 To run the program, type the following command:
 
 node MoviesCreateTable.js
+
+## Insert initial Data from JSON file
+Load the Sample Data into the Movies Table
+After you download the sample data, you can run the following program to populate the Movies table.
+
+Copy and paste the following program into a file named MoviesLoadData.js:
+```javascript
+var AWS = require("aws-sdk");
+var fs = require('fs');
+
+AWS.config.update({
+    region: "us-west-2",
+    endpoint: "http://localhost:8000"
+});
+
+var docClient = new AWS.DynamoDB.DocumentClient();
+
+console.log("Importing movies into DynamoDB. Please wait.");
+
+var allMovies = JSON.parse(fs.readFileSync('moviedata.json', 'utf8'));
+allMovies.forEach(function(movie) {
+    var params = {
+        TableName: "Movies",
+        Item: {
+            "year":  movie.year,
+            "title": movie.title,
+            "info":  movie.info
+        }
+    };
+
+    docClient.put(params, function(err, data) {
+       if (err) {
+           console.error("Unable to add movie", movie.title, ". Error JSON:", JSON.stringify(err, null, 2));
+       } else {
+           console.log("PutItem succeeded:", movie.title);
+       }
+    });
+});
+```
+To run the program, type the following command:
+
+node MoviesLoadData.js
+
+## Create a New Item
+In this step, you add a new item to the Movies table.
+```javascript
+Copy and paste the following program into a file named MoviesItemOps01.js:
+
+var AWS = require("aws-sdk");
+
+AWS.config.update({
+  region: "us-west-2",
+  endpoint: "http://localhost:8000"
+});
+
+var docClient = new AWS.DynamoDB.DocumentClient();
+
+var table = "Movies";
+
+var year = 2015;
+var title = "The Big New Movie";
+
+var params = {
+    TableName:table,
+    Item:{
+        "year": year,
+        "title": title,
+        "info":{
+            "plot": "Nothing happens at all.",
+            "rating": 0
+        }
+    }
+};
+
+console.log("Adding a new item...");
+docClient.put(params, function(err, data) {
+    if (err) {
+        console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
+    } else {
+        console.log("Added item:", JSON.stringify(data, null, 2));
+    }
+});
+```
+Note
+
+The primary key is required. This code adds an item that has a primary key (year, title) and info attributes. The info attribute stores sample JSON that provides more information about the movie.
+
+To run the program, type the following command:
+
+node MoviesItemOps01.js
