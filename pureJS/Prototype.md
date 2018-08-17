@@ -15,11 +15,10 @@ Có thể hiểu Prototype của Object chính là khuôn mẫu, hay là sư ph�
 Mỗi khi gọi đến một thuộc tính của thằng Object để nhờ làm việc,JS sẽ tìm trong Object xem có không, nếu không thì tìm đến thằng sư phụ.
 Đấy là lí do mà có thể sử dụng những hàm như hasOwnProperty để kiểm tra xem thuộc tính đó có tồn tại trong Object hay không vì thằng sư tổ Object.prototype đã có rồi.
 
-
-
+```javascript
 var anhtus = {};
-
 anhtus.hasOwnProperty('abc'); // false
+```
 Nếu thằng sư phụ hay sư tổ mà cũng không thể thực hiện được, lúc này việc cần làm là dạy cho 1 sư nào đó cách thực hiện để tất cả những đệ tử tầng dưới có thể làm theo =)) Ví dụ sư phụ chưa biết bay, ta sẽ cho sư phụ học bay, và các đệ tử tầng dưới được kế thừa lại những tinh hoa từ sư phụ:
 ```javascript
 // Sử dụng Object literal
