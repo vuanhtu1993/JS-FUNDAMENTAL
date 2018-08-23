@@ -291,7 +291,7 @@ const MyButton = (<button>{1 + 5}</button>)
     + render()
     + componentDidMount()
   - Update: Khi props hay state của component được thay đổi thì bản thân component sẽ được re-render lại qua các phương thức:
-    + componentWillReceiveProps()
+    + componentWillReceiveProps() Some Markdown text with <span style="color:blue">some *blue* text</span>.
     + shouldComponentUpdate()
     + componentWillUpdate()
     + render()
