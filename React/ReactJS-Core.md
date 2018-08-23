@@ -291,9 +291,9 @@ const MyButton = (<button>{1 + 5}</button>)
     + render()
     + componentDidMount()
   - Update: Khi props hay state của component được thay đổi thì bản thân component sẽ được re-render lại qua các phương thức:
-    + componentWillReceiveProps() <span style="color:red">some **This is Red Bold.** text</span>
+    + componentWillReceiveProps() (**Không khuyên dùng.** )
     + shouldComponentUpdate()
-    + componentWillUpdate()
+    + componentWillUpdate()       (**Không khuyên dùng.** )
     + render()
     + componentDidUpdate()
   - Unmount: Compont được xóa khỏi DOM.
@@ -301,7 +301,7 @@ const MyButton = (<button>{1 + 5}</button>)
   * [ ] Understand why we need lifecycle methods <br>
   Lifecycle methods cho phép ta cập nhật lại UI khi có sự thay đổi về props hoặc state của các component.
   * [ ] Understand 7 lifecycle methods of React Component (http://busypeoples.github.io/post/react-component-lifecycle/) <br>
-  7 vòng đời của một Component trong React: 
+  #### 7 hàm trong vòng đời của một Component trong React: 
   - componentWillMount(): được thực thi trước khi component được render. Phương thức này chỉ được gọi một lần.
   - componentDidMount(): method này được thực thi khi một component được render và được đưa vào DOM. Có thể sử dụng method này để lấy dữ liệu từ server với AJAX.
   - componentWillReceiveProps(): sẽ được thực thi ngay khi thuộc tính props được update và trước khi component được render lại. 
@@ -309,9 +309,13 @@ const MyButton = (<button>{1 + 5}</button>)
   - componentWillUpdate(): được gọi khi chúng ta update state của component trước khi nó render lại
   - componentDidUpdate(): sau khi componentWillUpdate ở trên được gọi xong thì đến lượt method này được gọi. 
   - componentWillUnmount(): được gọi khi chúng ta xóa component khỏi DOM.
-  * [ ] Understand componentDidMount = where you do DOM manipulation & AJAX request <br>
-  * [ ] Understand componentWillMount = clean up after your React components gets destroyed <br>
-  * [ ] Practice: create a Component that have 7 lifecycle methods and observe the behaviour <br>
+  
+  ### Một số vd thế việc sử dụng LC
+  #### Case 1. Khi call API duy nhất 1 lần => lấy dữ liệu fill vào màn hình => Thì sử dụng LC nào ?
+  - Phân tích chút xíu: Vừa mới khởi tạo component => component chạy vào constructor => render => componentDidMount (hết quá trình mounting)
+   > Ổn r => Có thể call API tại quá trình mounting tại componentDidMount
+  - Nhưng như vậy thì các dữ liệu sau khi đc trả về làm sao có thể được thế hiện trên màn hình => dẫn đến quá trình **updating**
+  - Nhận thấy quá trình **updating** chỉ được bắt đầu khi có props (shouldComponentUpdate) || state (setState, hoặc shouldComponentUpdate) thay đổi => như vậy kế hợp componentDidMount và setState là hợp lí nhất trong case 1 này
 ## 1.10 Refs [%]
   * [ ] Understand refs = how to access DOM nodes within your React Component (https://reactjs.org/docs/refs-and-the-dom.html#the-ref-string-attribute) <br>
   refs dùng để tham chiếu đến một node DOM hoặc là một thể hiện của một component. refs sẽ trả về một node mà chúng ta tham chiếu đến. refs được sử dụng trong một số trường hợp:
