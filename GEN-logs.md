@@ -10,3 +10,19 @@ H phải chuyển sang thằng Grid cho nó hoàng tráng, bằng bạn bằng b
 Tôi phải lọ mọ tìm hiểu lại vì thực sự đã hiểu gì về nó đâu, dự ấn trước làm tay chân à.
 1. React Questions: 
 2. React- Redux questions:
+
+Life-cycle hooks (V >16)
+
+Context ?
+
+Render props ?
+
+StrictMode ?
+
+createRef() ?
+
+#### Redux ?
+- Gỉair thích về luồng React-Redux:
+What: Redux là gì 
+Why: Tại sao phải dùng Redux
+Redux Saga ?
