@@ -5,3 +5,8 @@ Thôi không sao cũng coi như chưa quen cònfig. Đến phần cho được r
 Nhưng mà vẫn đéo work vì heigh: 1vh là full màn. đền đệt hoá ra phải bằng 100vh với đúng
 H phải chuyển sang thằng Grid cho nó hoàng tráng, bằng bạn bằng bè (hay phết chứ ko đùa)
  
+### Ngày 1/2/2019: Câu hỏi đầu ngày gây đau lòng: Em đã thực sự hiểu hết redux chưa
+
+Tôi phải lọ mọ tìm hiểu lại vì thực sự đã hiểu gì về nó đâu, dự ấn trước làm tay chân à.
+1. React Questions: 
+2. React- Redux questions:
