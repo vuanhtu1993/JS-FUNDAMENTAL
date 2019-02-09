@@ -104,3 +104,49 @@ Trả lại một reducer và dispatch lại cho reducer
 
 #### Redux Saga ?
 
+### Ngày 3: Mùng 6 tết với quyết tâm làm việc tới bến:
+#### Webpack là cái khỉ gì:
+ - Theo định nghĩa chính thức: là một module bundler cho các ứng dụng JS hiện đại. Khi webpack chạy nó sẽ nội tại build một dependency graph cái sẽ map các module mà dự án cần để generate one or more bundles
+ - Tại sao phải dùng Webpack (Được chạy trên nền NodeJS): 
+1. Sự ra đời của JS module bắt đầu từ khi CommonJS ra đời mà cho ra khái niệm `require`cũng là lúc khái niệm module ra đời cho phép
+load và sử dụng module ở bên trong một file bằng term `require`
+Nhưng mà không một browser nào hỗ trở CommonJS cà và CommonJS chỉ phổ biến ở các ứng dụng NodeJS
+2. Sự ra đời của Browserify, RequireJS and SystemJS cho phép sử dụng CommonJS ở các browser
+3. Thât may mắn là khái niệm module đã được chính thức ở ES6 bằng term `from`
+4. Vậy sự tồn tại của Webpack là gì? là nó sẽ không chỉ bundle `.js` files mà  different assets như images, fonts and stylesheets.
+#### Core concept của Webpack
+1. Entry: Là điểm bắt đầu của dependency graph 
+```javascript
+  module.exports = {
+  entry: './path/to/my/entry/file.js'
+};
+```
+2. Output: Là nơi khai báo tên và đường dẫn của files outputs
+3. Loaders: Thực tể Webpack chỉ hiểu JS files và package.json. Loaders cho phép webpack sử lí các kiểu files khác thành các module hợp lệ để sử dụng trong ứng dụng và được thêm vào dependency graph
+```javascript
+const path = require('path');
+
+module.exports = {
+  output: {
+    filename: 'my-first-webpack.bundle.js'
+  },
+  module: {
+    rules: [
+      { test: /\.txt$/, use: 'raw-loader' }
+    ]
+  }
+};
+```
+4. Plugins: được tận dụng để thực hiện các wider range of tasks như tối ưu bundle và quản lí asset
+#### Cac lỗi hay gắp webpack
+1. Trong file sử dụng ES6 nhưng chưa cài babel loader
+```javascript
+Module parse failed: Unexpected token (7:2)
+You may need an appropriate loader to handle this file type.
+| const Home = () => (
+>   <div>
+|     <Head title="Home" />
+|     <Nav />
+
+
+```
