@@ -150,3 +150,9 @@ You may need an appropriate loader to handle this file type.
 
 
 ```
+
+### Ngay 4: Học lại về Css cơ bản
+1. Adding css file into HTML files:
+2. Box - model: 
+3. Grid: Các bước để tạo ra một layout bằng grid là:
+  * 1. display: grid, tạo ra các div, định nghĩa là  
