@@ -67,7 +67,7 @@ Là một tools để đánh dấu cacs thành phần có thể gây ra lỗi tr
 
 - Warning about legacy string ref API usage
 
-- Warning about deprecated findDOMNode usage
+- Warning about deprecated findDOMNode usage    
 
 - Detecting unexpected side effects
 
@@ -103,4 +103,7 @@ Middleware: Là phần nằm giữa action và reducer => Nó vô cùng hữu d�
 Trả lại một reducer và dispatch lại cho reducer
 
 #### Redux Saga ?
+
+
+#### Cut HTML CSS using GRID
 
