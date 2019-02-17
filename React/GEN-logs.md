@@ -166,4 +166,5 @@ Chiều rộng(width) sẽ luôn tràn hết =100% nếu cac items bên trong ko
  mã sẽ sử dụng thuộc tính flex = 1, 2, 3 theo tỉ lệ phân số
  * 3. Thuộc tính height mặc định của các các items sẽ bằng nhau là bằng bằng thành cao nhất, quyết đinh bởi thuộc tính aligh-items
  * 4. Tạo gap cho các items bằng cách fix width (flex-basis) và justify-content
+ * 5. Có thể cho một phần tử là center (justify-content, align-items: center tại phần tử cha) bằng cách css phần tử đó margin: auto
  
