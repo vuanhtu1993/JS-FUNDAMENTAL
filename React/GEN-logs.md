@@ -170,3 +170,31 @@ Chiều rộng(width) sẽ luôn tràn hết =100% nếu cac items bên trong ko
  * 4. Tạo gap cho các items bằng cách fix width (flex-basis) và justify-content
  * 5. Có thể cho một phần tử là center (justify-content, align-items: center tại phần tử cha) bằng cách css phần tử đó margin: auto
  
+### Ngày 5: 18/2 Bắt đầu lấy source code về đọc :)))
+- Nói chung cũng chưa tiếp cânj một source chuyện nghiêp nào nên đọc source nay cũng ghê phết đấy:
+* 1. Đầu tiên là export import, thầy toan là export default and module.exports (dọc méo hiểu gì :))))
+ - Về định nghĩa nhé: export là một biếu thức cho phép một JS module (mỗi file là 1 module) export function, object, primitive values. Sử dụng import ở module muốn dùng để sử dụng
+ - Các loại export nào : Easy quá có 2 loại thôi, export `name` và `default`, named thì có thể export object, function, ... nhiều giá trị nhưng chi có 1 export default
+ ```javascript
+//module.js
+export default class {
+  constructor() {
+    console.log("GOOD");
+  }
+}
+export class Foo {
+  constructor() {
+    console.log("FOO");
+  }
+}
+export const url = "http://www.kaplankomputing.com";
+export function bar() {
+console.log("bar");
+}
+// IMPORT
+import Custom, {Foo, url, bar} from './module';
+const custom = new Custom();
+const foo = new Foo();
+bar();
+console.log(url);
+ ``` 
