@@ -152,3 +152,21 @@ module.exports = {
 |     <Nav />
 
 ```
+
+### Ngay 4: Học lại về Css cơ bản
+1. Adding css file into HTML files:
+2. Box - model: 
+3. Grid: Các bước để tạo ra một layout bằng grid là:
+  * 1. Tạo các lưới chia layout bằng grid column hoặc grid row  
+  * 2. Dựng layout cho các thành phần trong grid bằng grid template
+  * 3. Dùng @media query để chia responsive
+4. Kể ra từ khi dùng dự án cung ít khi dùng grid vì layout khá đơn giản, chủ yếu lại dùng flex :)))
+Thế lại ôn lại về flex vậy:
+ * 1. Cái hay đầu tiên là cứ thằng cha display: flex thì tức là các thằng bên trong bắt đầu phải tuân theo quy tắc của cách chia layout này bao gồm flex-direction: row, justify-content: flex-start, align-items: stretch, ...
+Chiều rộng(width) sẽ luôn tràn hết =100% nếu cac items bên trong ko xác định chiều rộng
+ * 2. khi sử dụng flex, ta sẽ ko sử dụng % để chia chiều rộng của cột cũng nhưng chiều dài (height) khi đã biết trươc height
+ mã sẽ sử dụng thuộc tính flex = 1, 2, 3 theo tỉ lệ phân số
+ * 3. Thuộc tính height mặc định của các các items sẽ bằng nhau là bằng bằng thành cao nhất, quyết đinh bởi thuộc tính aligh-items
+ * 4. Tạo gap cho các items bằng cách fix width (flex-basis) và justify-content
+ * 5. Có thể cho một phần tử là center (justify-content, align-items: center tại phần tử cha) bằng cách css phần tử đó margin: auto
+ 
