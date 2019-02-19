@@ -1,3 +1,7 @@
+- ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) `#f03c15`
+- ![#c5f015](https://placehold.it/15/c5f015/000000?text=+) `#c5f015`
+- ![#1589F0](https://placehold.it/15/1589F0/000000?text=+) `#1589F0`
+
 ### 1. Ngày 31/1/2019: Bắt đầu quá trình quay trở lại ReactJs cuả tối như thế naò
 Mới đầu cũng tự tin phết, js cũng không quá khó với tôi. Tự tin có thể cân đc vài phần hộ anh Tuấn :))). Cơ mà căng vđ, mỗi cái cho Css vào trong file HTML công thêm cái back-ground image mà lỗi lên lỗi xuống mất bố nó cả ngày, hầy
 Thôi không sao cũng coi như chưa quen cònfig. Đến phần cho được rồi thì được giao 4 cái HTML để cắt cho nó responsive ngon ngẻ :))). ĐM khó vãi đạn, sao flex ko work hoá ra quên display: flex. Ở RN méo cần cái này nhé, tự động rồi
@@ -198,3 +202,4 @@ const foo = new Foo();
 bar();
 console.log(url);
  ``` 
+ - ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) `Lưu ý với cú pháp module.exports chỉ dùng ở node js và được đi cùng cú pháp require ở file import `
